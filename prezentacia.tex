@@ -104,7 +104,7 @@
 \usepackage[slovak]{babel}
 \usepackage{graphicx}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta, shapes, positioning, fit, backgrounds}
+\usetikzlibrary{arrows.meta, shapes, positioning, fit, backgrounds, calc}
 \usepackage{amsmath}
 \usepackage{booktabs}
 \usepackage{fontawesome5}
@@ -239,7 +239,7 @@ Príznaky, Harris detektor, RANSAC – prednáška 7.}
 
 % Vizualizácia – centrovane, väčšia
 \begin{center}
-\begin{tikzpicture}[scale=1.15]
+\begin{tikzpicture}[scale=1.0]
 % Fotka 1
 \draw[pvsoBlue, thick, fill=pvsoBlue!8] (0,0) rectangle (2.4,1.65);
 \node[font=\small, pvsoBlue] at (1.2,1.95) {\textbf{Fotka 1}};
@@ -263,17 +263,17 @@ Príznaky, Harris detektor, RANSAC – prednáška 7.}
 \node[font=\small, pvsoGray] at (2.75,-0.28) {korešpondencie (SIFT matching)};
 
 % Šípka a výsledok
-\node[font=\small, pvsoGray] at (2.75,-0.80) {$\Downarrow$\enspace triangulácia\enspace$\Rightarrow$\enspace sparse 3D body};
+\node[font=\small, pvsoGray] at (2.75,-0.70) {$\Downarrow$\enspace triangulácia\enspace$\Rightarrow$\enspace sparse 3D body};
 
 % Sparse cloud – kompaktne
-\foreach \x/\y in {1.35/-1.50, 1.85/-1.25, 2.35/-1.55,
-                   2.80/-1.28, 3.25/-1.48, 2.05/-1.72, 2.90/-1.70, 2.55/-1.38} {
+\foreach \x/\y in {1.35/-1.35, 1.85/-1.10, 2.35/-1.40,
+                   2.80/-1.13, 3.25/-1.33, 2.05/-1.55, 2.90/-1.53, 2.55/-1.23} {
     \node[circle, fill=pvsoBlue!75, inner sep=2.5pt] at (\x,\y) {};
 }
 \end{tikzpicture}
 \end{center}
 
-\vspace{0.12cm}
+\vspace{0.04cm}
 \begin{columns}[t]
 \column{0.5\textwidth}
 \begin{block}{Feature Extraction (SIFT)}
@@ -307,19 +307,18 @@ Z korešpondencií COLMAP vypočíta:
 {\footnotesize Výsledok: \texttt{cameras.bin}, \texttt{images.bin}, \texttt{points3D.bin}}
 \end{block}
 
-\vspace{0.2cm}
+\vspace{0.08cm}
 \begin{block}{Undistortion (\texttt{convert.py})}
-Reálne objektívy \textbf{skresľujú} obraz (radiálna distorzia).
-3DGS potrebuje \textbf{ideálny pinhole model}:
-\begin{itemize}\setlength{\itemsep}{2pt}
+{\small Reálne objektívy \textbf{skresľujú} obraz (radiálna distorzia). 3DGS potrebuje \textbf{ideálny pinhole model}:
+\begin{itemize}\setlength{\itemsep}{0pt}
     \item COLMAP vypočíta parametre distorzie
     \item \texttt{convert.py} vytvorí undistortované fotky
-\end{itemize}
+\end{itemize}}
 \end{block}
 
 \column{0.50\textwidth}
 \begin{center}
-\begin{tikzpicture}[scale=1.28]
+\begin{tikzpicture}[scale=1.1]
 \fill[pvsoGray!15] (-2,-0.3) rectangle (2,0);
 \foreach \x/\y in {-1.2/0.5, -0.5/1.0, 0/0.8, 0.5/1.3, 1.0/0.6,
                     1.4/0.9, -0.8/1.5, 0.3/0.4, -0.2/1.8, 0.8/0.2} {
@@ -350,7 +349,7 @@ Reálne objektívy \textbf{skresľujú} obraz (radiálna distorzia).
 scéna ako \highlight{milióny 3D Gaussiánov},
 každý popisuje jeden „kúsok" scény.
 
-\vspace{0.12cm}
+\vspace{0.06cm}
 \begin{block}{Prečo Gaussiány?}
 \begin{itemize}\setlength{\itemsep}{1pt}
     \item \textbf{explicitná} reprezentácia (na rozdiel od NeRF)
@@ -360,19 +359,6 @@ každý popisuje jeden „kúsok" scény.
 \end{itemize}
 \end{block}
 
-\vspace{0.12cm}
-\begin{alertblock}{Porovnanie s NeRF}
-{\small\setlength{\tabcolsep}{4pt}
-\begin{tabular}{lcc}
-\toprule
-& \textbf{NeRF} & \textbf{3DGS} \\
-\midrule
-Reprezentácia  & implicitná (MLP)& explicitná \\
-Renderovanie   & minúty          & \textbf{real-time} \\
-Editovateľnosť & ťažká           & jednoduchšia \\
-\bottomrule
-\end{tabular}}
-\end{alertblock}
 
 \column{0.44\textwidth}
 \begin{center}
@@ -403,7 +389,8 @@ Editovateľnosť & ťažká           & jednoduchšia \\
 
 Každý Gaussián má \highlight{tieto parametre} (optimalizujú sa pri trénovaní):
 
-\vspace{0.25cm}
+\vspace{0.05cm}
+{\setlength\abovedisplayskip{2pt}\setlength\belowdisplayskip{2pt}%
 \begin{columns}[t]
 \column{0.25\textwidth}
 \begin{block}{\faMapMarker\ Poloha}
@@ -428,21 +415,47 @@ opacity – ako veľmi je Gaussián „viditeľný"
 Spherical Harmonics (SH)\\[2pt]
 farba závisí od\\smeru pohľadu
 \end{block}
-\end{columns}
+\end{columns}}
 
-\vspace{0.3cm}
+\vspace{0.05cm}
 \begin{center}
-\begin{tikzpicture}[scale=1.1]
-\draw[pvsoBlue, thick, fill=pvsoBlue!15, rotate around={40:(0,0)}]
-    (0,0) ellipse (1.8 and 0.72);
-\node[circle, fill=pvsoRed, inner sep=3.5pt] at (0,0) {};
-\draw[pvsoGray, dashed, thick] (-1.55,0.45) -- (1.55,-0.45);
-\draw[pvsoGray, dashed, thick] (-0.58,-0.72) -- (0.58,0.72);
-\draw[-{Stealth}, pvsoRed, thick] (0,0) -- (1.0,0.75)
-    node[above right, font=\small]{$\boldsymbol{\mu}$};
-\node[font=\small, pvsoBlue, anchor=west] at (2.4, 0.75) {$\alpha = 0.8$};
-\node[font=\small, pvsoBlue, anchor=west] at (2.4, 0.25) {farba $= f(\text{smer})$};
-\node[font=\small, pvsoBlue, anchor=west] at (2.4,-0.25) {$\boldsymbol{\Sigma}$ = elipsoid};
+\begin{tikzpicture}[scale=0.95]
+% ── Gaussián – elipsoid (reprezentuje Σ) ────────────────────────────────
+\draw[pvsoBlue, thick, fill=pvsoBlue!18, fill opacity=0.65,
+      rotate around={35:(0,0)}]
+    (0,0) ellipse (1.85 and 0.72);
+
+% Poloosi – naznačujú kovariančnú maticu
+\draw[pvsoGray!65, dashed, rotate around={35:(0,0)}] (-1.85,0) -- (1.85,0);
+\draw[pvsoGray!65, dashed, rotate around={35:(0,0)}] (0,-0.72) -- (0,0.72);
+
+% ── Stred – μ ────────────────────────────────────────────────────────────
+\node[circle, fill=pvsoRed, inner sep=4pt] (C) at (0,0) {};
+\draw[-{Stealth[length=5pt]}, pvsoRed, thick] (0,0) -- (-0.5,1.0);
+\node[pvsoRed, font=\small\bfseries, anchor=south] at (-0.5,1.02)
+    {$\boldsymbol{\mu}$ – poloha stredu};
+
+% ── Σ – tvar a orientácia (callout na obvod elipsy) ─────────────────────
+\draw[pvsoBlue!80!black, thin, -{Stealth[length=4pt]}]
+    (-3.1,0.1) -- (-1.62,0.35);
+\node[pvsoBlue!80!black, font=\small\bfseries, anchor=east] at (-3.1,0.1)
+    {$\boldsymbol{\Sigma}$ – tvar a orientácia};
+
+% ── α – priehľadnosť (callout na výplň) ─────────────────────────────────
+\draw[pvsoGray, thin, -{Stealth[length=4pt]}]
+    (2.85,0.2) -- (1.1,0.1);
+\node[pvsoGray, font=\small, anchor=west] at (2.85,0.2)
+    {$\alpha$ – priehľadnosť};
+
+% ── Farba – view-dependent: dve šípky pohľadov ──────────────────────────
+\draw[-{Stealth[length=6pt]}, orange!80!red, thick]
+    (-2.5,-1.0) -- (-0.55,-0.2);
+\draw[-{Stealth[length=6pt]}, cyan!65!blue, thick]
+    ( 2.5,-1.0) -- ( 0.6,-0.18);
+\node[orange!80!red, font=\scriptsize, anchor=north] at (-2.3,-1.0) {pohľad 1};
+\node[cyan!65!blue,  font=\scriptsize, anchor=north] at ( 2.3,-1.0) {pohľad 2};
+\node[pvsoGray, font=\footnotesize] at (0,-1.35)
+    {farba $= f(\text{smer pohľadu})$ – Spherical Harmonics};
 \end{tikzpicture}
 \end{center}
 
@@ -539,10 +552,10 @@ $\Rightarrow$ môžeme optimalizovať parametre!
 \draw[arrow, green!55!black]    (optim) -- (dens);
 \draw[arrow, orange!70!black]   (dens)  -- (init);
 
-\node[font=\footnotesize, pvsoGray, right=0.2cm of dens]
+\node[font=\footnotesize, pvsoGray, below=0.12cm] at ($(dens)!0.5!(optim)$)
     {pridaj Gaussiány tam kde chýbajú};
-\node[font=\footnotesize, pvsoGray, right=0.2cm of optim]
-    {gradient descent, Adam};
+\node[font=\footnotesize, pvsoGray, below=0.12cm of optim]
+    {Adam optimizer};
 \end{tikzpicture}
 \end{center}
 
@@ -582,7 +595,7 @@ $\Rightarrow$ môžeme optimalizovať parametre!
 \end{itemize}
 \end{block}
 
-\vspace{0.18cm}
+\vspace{0.1cm}
 \begin{block}{SIBR Gaussian Viewer}
 \begin{itemize}\setlength{\itemsep}{2pt}
     \item interaktívna 3D navigácia
@@ -591,7 +604,7 @@ $\Rightarrow$ môžeme optimalizovať parametre!
 \end{itemize}
 \end{block}
 
-\vspace{0.18cm}
+\vspace{0.1cm}
 \textbf{Metrika kvality:}\enspace
 {\small PSNR $\approx$ 27–30 dB = dobrý výsledok\enspace
 {\footnotesize(30+\,dB = výborný)}}
@@ -609,7 +622,7 @@ Iterácie & PSNR \\
 \end{tabular}
 \end{block}
 
-\vspace{0.18cm}
+\vspace{0.1cm}
 \begin{block}{Kde sa používa?}
 \begin{itemize}\setlength{\itemsep}{2pt}
     \item VR/AR – interaktívne scény
@@ -642,7 +655,7 @@ Iterácie & PSNR \\
 Spustenie: \texttt{./run.sh}}
 \end{block}
 
-\vspace{0.18cm}
+\vspace{0.1cm}
 \begin{block}{\faCamera\ Kamera Ximea}
 {\small
 \begin{itemize}\setlength{\itemsep}{1pt}
@@ -656,11 +669,11 @@ Spustenie: \texttt{./run.sh}}
 \column{0.48\textwidth}
 
 \begin{block}{\faListOl\ Postup}
-{\small
-\begin{enumerate}\setlength{\itemsep}{2pt}
+{\footnotesize
+\begin{enumerate}\setlength{\itemsep}{0pt}
     \item \texttt{./run.sh} – spusti Docker
     \item \texttt{colmap gui} – rekonštrukcia
-    \begin{itemize}\footnotesize\setlength{\itemsep}{0pt}
+    \begin{itemize}\setlength{\itemsep}{0pt}
         \item Feature extraction (SIMPLE\_PINHOLE)
         \item Feature matching (Exhaustive)
         \item Reconstruction
@@ -765,7 +778,7 @@ Podrobný postup: \textbf{NAVOD.md}
 \end{enumerate}
 \end{alertblock}
 
-\vspace{0.28cm}
+\vspace{0.15cm}
 \begin{block}{Zdroje}
 \begin{itemize}\small\setlength{\itemsep}{2pt}
     \item Kerbl et al.\ SIGGRAPH 2023
