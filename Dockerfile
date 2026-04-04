@@ -146,15 +146,6 @@ ENV PATH="/opt/gaussian-splatting/SIBR_viewers/install/bin:${PATH}"
 # PyTorch native libs must be on the linker path for simple-knn, diff-gaussian-rasterization, etc.
 ENV LD_LIBRARY_PATH="/usr/local/lib/python3.10/dist-packages/torch/lib:${LD_LIBRARY_PATH:-}"
 
-# ─── Helper scripts ───────────────────────────────────────────────────────────
-COPY scripts/ /opt/scripts/
-RUN find /opt/scripts -name "*.sh" -exec chmod +x {} \;
-
-RUN ln -s /opt/scripts/colmap_gui.sh       /usr/local/bin/colmap-gui      && \
-    ln -s /opt/scripts/prepare_dataset.sh  /usr/local/bin/prepare-dataset && \
-    ln -s /opt/scripts/train.sh            /usr/local/bin/gs-train        && \
-    ln -s /opt/scripts/view_result.sh      /usr/local/bin/gs-view
-
 # ─── Workspace ────────────────────────────────────────────────────────────────
 RUN mkdir -p /workspace/data /workspace/output
 
