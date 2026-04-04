@@ -733,12 +733,12 @@ Podrobný postup: \textbf{NAVOD.md}
 \node[circle, fill=pvsoBlue, inner sep=4pt] at (0,0) {};
 \node[font=\small, pvsoBlue] at (0,0.38) {\textbf{objekt}};
 \foreach \a in {0,45,...,315} {
-    \draw[pvsoRed, -{Stealth[length=4.5pt]}, thick]
-        ({3.2*cos(\a)},{1.0*sin(\a)}) -- ({2.94*cos(\a)},{0.92*sin(\a)});
+    \draw[pvsoRed, -{Stealth[length=8pt]}, thick]
+        ({3.2*cos(\a)},{1.0*sin(\a)}) -- ({2.45*cos(\a)},{0.77*sin(\a)});
     \draw[pvsoRed, fill=pvsoRed!25, thick]
         ({3.2*cos(\a)},{1.0*sin(\a)})
-        -- ({3.2*cos(\a)+0.20*cos(\a-90)},{1.0*sin(\a)+0.20*sin(\a-90)})
-        -- ({3.2*cos(\a)+0.20*cos(\a+90)},{1.0*sin(\a)+0.20*sin(\a+90)}) -- cycle;
+        -- ({3.2*cos(\a)+0.30*cos(\a-90)},{1.0*sin(\a)+0.30*sin(\a-90)})
+        -- ({3.2*cos(\a)+0.30*cos(\a+90)},{1.0*sin(\a)+0.30*sin(\a+90)}) -- cycle;
 }
 \node[font=\small, pvsoGray, anchor=west] at (3.55, 0.28) {ideálna trajektória};
 \node[font=\small, pvsoGray, anchor=west] at (3.55,-0.22) {= kruh okolo objektu};
