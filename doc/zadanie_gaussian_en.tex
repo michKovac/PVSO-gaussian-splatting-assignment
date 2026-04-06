@@ -13,7 +13,7 @@
 
 The goal of this assignment is to get familiar with the modern 3D scene reconstruction
 method called \textbf{3D Gaussian Splatting} (3DGS).
-Students will go through the full pipeline from photographs to an interactive 3D viewer,
+Students will go through the full workflow from photographs to an interactive 3D viewer,
 first on a reference dataset and then on a self-captured scene.
 \\[4pt]
 The assignment is worth \textbf{25~pts.} in total and consists of the following tasks:
@@ -21,12 +21,16 @@ The assignment is worth \textbf{25~pts.} in total and consists of the following 
 \begin{enumerate}
 
 % ── TASK 1 ───────────────────────────────────────────────────────────────────
-\item \textbf{[5~pts.]} Running the pipeline on a reference dataset.\\
+\item \textbf{[5~pts.]} Running the workflow on a reference dataset.\\
+This task is designed to help you \textbf{understand the full workflow} and verify
+that your environment works correctly before you start working with your own dataset.
+Working with reference data lets you learn each step without having to solve
+capture-related problems at the same time.\\[4pt]
 Download one of the publicly available datasets (e.g.\ \textit{Tanks and
 Temples -- truck}, \textit{garden}, or another compatible dataset).
 Use \textbf{only the photographs} from the dataset (the \texttt{input/} directory) --
 \emph{no pre-computed data}.
-Run the full pipeline from scratch following the guide in \texttt{NAVOD.md}:
+Run the full workflow from scratch following the guide in \texttt{GUIDE.md}:
 
 \begin{enumerate}
     \item \texttt{./run.sh} -- start the Docker container.
@@ -47,18 +51,18 @@ Document each step with screenshots (COLMAP GUI, training progress, viewer).
 Report the \textbf{PSNR} metric at 7\,000 and 30\,000 iterations.
 
 % ── TASK 2 ───────────────────────────────────────────────────────────────────
-\item \textbf{[8~pts.]} Capturing your own scene with the Ximea camera.\\
+\item \textbf{[10~pts.]} Capturing your own scene with the Ximea camera.\\
 Choose and capture your own scene using the industrial Ximea camera (high resolution).
 \textbf{Downscale} the images before running COLMAP
 (recommended: longer side to max.\ \textbf{600--1200~px}) -- the camera produces
 images with very high resolution that would make both COLMAP and 3DGS training
 impractically slow.
 
-Run the full pipeline in the same way as in Task~1.
+Run the full workflow in the same way as in Task~1.
 Report the achieved PSNR and visually compare the result with the reference dataset.
 
 % ── TASK 3 ───────────────────────────────────────────────────────────────────
-\item \textbf{[4~pts.]} Evaluation of results.\\
+\item \textbf{[5~pts.]} Evaluation of results.\\
 Compare the results of both scenes (reference dataset vs.\ your own scene):
 \begin{itemize}
     \item PSNR table at 7\,000 and 30\,000 iterations,
@@ -68,20 +72,10 @@ Compare the results of both scenes (reference dataset vs.\ your own scene):
 \end{itemize}
 
 % ── TASK 4 ───────────────────────────────────────────────────────────────────
-\item \textbf{[4~pts.]} Theoretical explanation of the method.\\
-Explain the following concepts in the documentation (in your own words, not copy-paste):
-\begin{itemize}
-    \item What are 3D Gaussians and what parameters do they have ($\mu, \Sigma, \alpha$, colour).
-    \item What COLMAP (SfM) does and why it is necessary.
-    \item How splatting works -- projection to 2D and alpha blending.
-    \item What the loss function optimises during training.
-\end{itemize}
-
-% ── TASK 5 ───────────────────────────────────────────────────────────────────
-\item \textbf{[4~pts.]} Documentation.\\
+\item \textbf{[5~pts.]} Documentation.\\
 Submit a report (PDF) containing:
 \begin{itemize}
-    \item description of each pipeline step with corresponding screenshots,
+    \item description of each step with corresponding screenshots,
     \item description of the scene capture process (what, where, how),
     \item visual comparison of results,
     \item conclusion with recommendations -- what you would do differently for better results.
@@ -96,10 +90,10 @@ Submit a report (PDF) containing:
 % =============================================================================
 \section*{Notes, Tips and Resources}
 
-\subsection*{Follow NAVOD.md}
+\subsection*{Follow GUIDE.md}
 
 All specific commands, paths and parameters are described in detail in
-\texttt{NAVOD.md} in the repository.
+\texttt{GUIDE.md} in the repository.
 If you encounter any problem, first read the \emph{Troubleshooting} section of the guide.
 
 % ── Dataset ──────────────────────────────────────────────────────────────────
@@ -197,7 +191,7 @@ $> 29$~dB & excellent \\
           \href{https://learnopencv.com/3d-gaussian-splatting/}{learnopencv.com/3d-gaussian-splatting}
     \item COLMAP documentation:
           \href{https://colmap.github.io/}{colmap.github.io}
-    \item Source code and guide: \texttt{NAVOD.md} in the repository
+    \item Source code and guide: \texttt{GUIDE.md} in the repository
 \end{itemize}
 
 \end{document}

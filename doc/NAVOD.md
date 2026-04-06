@@ -1,10 +1,10 @@
 # 3D Gaussian Splatting – Návod pre študentov
 
-> English version: [GUIDE.md](GUIDE.md)
+> English version: [GUIDE.md](GUIDE.md) | [README](../README.md)
 
 ## Pred začiatkom: snímanie vlastného datasetu
 
-Na snímanie obrazov pre vlastný dataset môžeš použiť skript [ximea-test.py](ximea-test.py), kde sú aj možnosti nastavenia kamery.
+Na snímanie obrazov pre vlastný dataset môžeš použiť skript [ximea-test.py](../ximea-test.py), kde sú aj možnosti nastavenia kamery.
 
 Krátko k nastaveniam **Automatic vs pevne nastavené**:
 - **Automatic** (expozícia/gain/white balance) je rýchly štart, ale medzi zábermi sa mení jas a farba, čo zhoršuje konzistenciu dát.

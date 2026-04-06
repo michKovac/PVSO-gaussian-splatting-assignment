@@ -1,10 +1,10 @@
 # 3D Gaussian Splatting – Student Guide
 
-> Slovenská verzia: [NAVOD.md](NAVOD.md)
+> Slovenská verzia: [NAVOD.md](NAVOD.md) | [README](../README.md)
 
 ## Before you start: capturing your own dataset
 
-You can use the [ximea-test.py](ximea-test.py) script to capture images for your own dataset. It also includes camera configuration options.
+You can use the [ximea-test.py](../ximea-test.py) script to capture images for your own dataset. It also includes camera configuration options.
 
 A note on **Automatic vs fixed settings**:
 - **Automatic** (exposure/gain/white balance) is a quick start, but brightness and colour change between frames, which hurts data consistency.

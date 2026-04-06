@@ -1,6 +1,6 @@
 # 3D Gaussian Splatting – Docker Setup
 
-> English version: [README_EN.md](README_EN.md)
+> English version: [doc/README_EN.md](doc/README_EN.md)
 
 Kompletné prostredie pre tvorbu 3D scén z fotografií.
 
@@ -11,8 +11,8 @@ Kompletné prostredie pre tvorbu 3D scén z fotografií.
 | **SIBR Viewer** | Interaktívne prezeranie natrénovaných scén |
 
 **Podrobný postup práce:**
-- [NAVOD.md](NAVOD.md) – slovensky
-- [GUIDE.md](GUIDE.md) – English
+- [NAVOD.md](doc/NAVOD.md) – slovensky
+- [GUIDE.md](doc/GUIDE.md) – English
 
 ---
 
@@ -194,6 +194,8 @@ gaussian_splatting/
 ├── .env                    ← cesty k dátam (uprav pred použitím)
 ├── run.sh                  ← spúšťač kontajnera (Linux / WSL2)
 ├── run.bat                 ← spúšťač pre Windows
-├── NAVOD.md                ← podrobný postup pre študentov
-└── scripts/                ← pomocné skripty vo vnútri kontajnera
+└── doc/
+    ├── NAVOD.md            ← podrobný postup pre študentov (SK)
+    ├── GUIDE.md            ← podrobný postup pre študentov (EN)
+    └── README_EN.md        ← anglická verzia README
 ```

@@ -1,6 +1,6 @@
 # 3D Gaussian Splatting – Docker Setup
 
-> Slovenská verzia: [README.md](README.md)
+> Slovenská verzia: [README.md](../README.md)
 
 Complete environment for creating 3D scenes from photographs.
 
