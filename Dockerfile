@@ -91,7 +91,7 @@ RUN git clone https://github.com/colmap/colmap.git /tmp/colmap \
         -DCUDA_ENABLED=ON \
         -DCMAKE_CUDA_ARCHITECTURES="60;70;75;80;86;89;90" \
         -G Ninja \
-    && ninja -j$(nproc) \
+    && ninja -j2 \
     && ninja install \
     && rm -rf /tmp/colmap
 
@@ -140,7 +140,7 @@ RUN cd SIBR_viewers && \
     cmake -Bbuild . \
         -DCMAKE_BUILD_TYPE=Release \
         -G Ninja \
-    && cmake --build build -j --target install
+    && cmake --build build -j2 --target install
 
 ENV PATH="/opt/gaussian-splatting/SIBR_viewers/install/bin:${PATH}"
 # PyTorch native libs must be on the linker path for simple-knn, diff-gaussian-rasterization, etc.

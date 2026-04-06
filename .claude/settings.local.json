@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(powershell -Command \"Get-Content 'D:\\\\git\\\\PVSO-gaussian-splatting-assignment\\\\run.bat' | Select-Object -First 10\")"
+    ]
+  }
+}

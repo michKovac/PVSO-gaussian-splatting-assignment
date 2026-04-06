@@ -1,5 +1,7 @@
 # 3D Gaussian Splatting – Návod pre študentov
 
+> English version: [GUIDE.md](GUIDE.md)
+
 ## Pred začiatkom: snímanie vlastného datasetu
 
 Na snímanie obrazov pre vlastný dataset môžeš použiť skript [ximea-test.py](ximea-test.py), kde sú aj možnosti nastavenia kamery.
@@ -48,7 +50,8 @@ Odporúčanie: po krátkom teste v automatic režime prepnúť na pevné hodnoty
 
 - Docker (s prístupom k GPU)
 - NVIDIA GPU (min. 8 GB VRAM)
-- Linux alebo Windows 11 s WSL2
+- Linux alebo Windows 11 s WSL2 (Windows 10 funguje, ale vyžaduje VcXsrv pre GUI)
+- Min. 8 GB RAM (odporúčané 16 GB) – build COLMAP je pamäťovo náročný
 
 ---
 
@@ -71,9 +74,22 @@ OUTPUT_PATH=/home/michal/Desktop/gaussian-splatting/output
 
 ## Spustenie kontajnera
 
+**Linux/WSL2:**
 ```bash
 ./run.sh
 ```
+
+**Windows 10:**
+1. Nainštaluj [VcXsrv](https://sourceforge.net/projects/vcxsrv/) a spusti XLaunch: Multiple windows, Display 0, Disable access control ✓
+2. Spusti `run.bat`
+
+> **Windows 10 – build zlyhá na RAM?** Vytvor `C:\Users\<meno>\.wslconfig`:
+> ```ini
+> [wsl2]
+> memory=6GB
+> swap=4GB
+> ```
+> Potom reštartuj Docker Desktop.
 
 Všetky ďalšie príkazy píš **vo vnútri kontajnera**.
 
@@ -205,6 +221,8 @@ data/
 python3 convert.py -s data/moja_scena --skip_matching
 ```
 
+> **Dôležité:** Bez tohto kroku `train.py` spadne s chybou `Could not recognize scene type!` — priečinok `images/` a `sparse/0/` musia existovať pred trénovaním.
+
 ---
 
 ### Štruktúra po convert.py (finálna, pripravená na trénovanie)
@@ -300,6 +318,11 @@ python3 train.py -s data/truck --data_device cpu
 **`CUDA out of memory`**
 - Pridaj `--resolution 2` alebo `--iterations 7000`
 
+**`Could not recognize scene type!`**
+- `convert.py` nebol spustený – chýba `images/` alebo `sparse/0/` v priečinku scény
+- Skontroluj štruktúru priečinka podľa sekcie "Štruktúra po convert.py"
+
 **COLMAP GUI sa neotvára**
-- Na hoste spusti: `xhost +local:docker`
-- Skontroluj že kontajner bol spustený cez `./run.sh`
+- Linux: Na hoste spusti: `xhost +local:docker`
+- Windows 10: Spusti VcXsrv (XLaunch) pred kontajnerom, Display number = 0, Disable access control ✓
+- Skontroluj že kontajner bol spustený cez `./run.sh` / `run.bat`

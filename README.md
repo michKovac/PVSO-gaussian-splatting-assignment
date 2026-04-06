@@ -1,5 +1,7 @@
 # 3D Gaussian Splatting – Docker Setup
 
+> English version: [README_EN.md](README_EN.md)
+
 Kompletné prostredie pre tvorbu 3D scén z fotografií.
 
 | Komponent | Popis |
@@ -8,7 +10,9 @@ Kompletné prostredie pre tvorbu 3D scén z fotografií.
 | **3D Gaussian Splatting** | Trénovanie neurálnej 3D reprezentácie scény |
 | **SIBR Viewer** | Interaktívne prezeranie natrénovaných scén |
 
-Podrobný postup práce nájdeš v [NAVOD.md](NAVOD.md).
+**Podrobný postup práce:**
+- [NAVOD.md](NAVOD.md) – slovensky
+- [GUIDE.md](GUIDE.md) – English
 
 ---
 
