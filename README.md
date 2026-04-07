@@ -130,6 +130,13 @@ docker compose build
 
 ## Spustenie
 
+> **Linux – jednorazové nastavenie pred prvým spustením:**  
+> Ak dostaneš chybu `permission denied while trying to connect to the Docker daemon`, pridaj sa do skupiny `docker`:
+> ```bash
+> sudo usermod -aG docker $USER
+> newgrp docker   # platí pre aktuálnu session; pri ďalšom prihlásení automaticky
+> ```
+
 ```bash
 ./run.sh
 ```

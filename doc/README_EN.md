@@ -138,6 +138,13 @@ docker compose build
 
 ## Running
 
+> **Linux – one-time setup before first run:**  
+> If you get `permission denied while trying to connect to the Docker daemon`, add yourself to the `docker` group:
+> ```bash
+> sudo usermod -aG docker $USER
+> newgrp docker   # effective immediately; permanent after next login
+> ```
+
 **Linux / WSL2:**
 ```bash
 ./run.sh
